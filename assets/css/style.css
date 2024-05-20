@@ -176,3 +176,9 @@ section{
     object-fit: cover;
 }
 /* sticky menu */
+
+.fixed-size2 {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
