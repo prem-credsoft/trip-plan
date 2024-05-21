@@ -165,10 +165,10 @@ a{
     width: 100%;
     z-index: 1000; /* Ensures it stays on top */
 }
-section{
+/* section{
     min-height: 500px;
     border: 1px solid;
-}
+} */
 /* sticky menu */
 
 .fixed-size {
