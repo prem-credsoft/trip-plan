@@ -15,9 +15,93 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+          font-family: 'Rubik', sans-serif;
+          margin: 0;
+          padding: 0;
+      }
+      .container {
+          display: flex;
+          gap: 10px;
+      }
+      .container img {
+          cursor: pointer;
+          width: 100%;
+          height: auto;
+      }
+      .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* display: flex; */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+      .modal-content {
+          margin: auto;
+          display: block;
+          width: 80%;
+          max-width: 700px;
+      }
+      .close {
+          position: absolute;
+          top: 15px;
+          right: 35px;
+          color: #fff;
+          font-size: 40px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .prev, .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -50px;
+          color: white;
+          font-weight: bold;
+          font-size: 20px;
+          transition: 0.6s ease;
+          user-select: none;
+      }
+      .prev {
+          left: 0;
+      }
+      .next {
+          right: 0;
+      }
+      .thumbnails {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+      }
+      .thumbnails img {
+          width: 100px;
+          height: auto;
+          margin: 0 5px;
+          cursor: pointer;
+          opacity: 0.6;
+      }
+      .thumbnails img.active {
+          border: 2px solid #fff;
+          opacity: 1;
+      }
+  </style>
   </head>
-  <body style="font-family: 'Rubik', sans-serif;">
+  <body style="font-family: 'Rubik', sans-serif">
     <div class="header">
       <div class="topbar">
         <div class="container d-flex gap-5 align-items-center">
@@ -163,20 +247,33 @@
         </div>
       </div>
     </div>
-    <div class="main">
-      <div class="container">
-        <div class="hero_carousel">
-          <div class="hero_item1">
-            <img src="assets/img/1.webp" alt="hero_image" class="img-fluid" />
-          </div>
-          <div class="hero_item2">
-            <img src="assets/img/2.webp" alt="hero_image" class="img-fluid" />
-          </div>
-          <div class="hero_item3">
-            <img src="assets/img/3.webp" alt="hero_image" class="img-fluid" />
-          </div>
+
+
+    <div class="container">
+      <div class="hero_carousel">
+        <div class="hero_item1">
+          <img src="assets/img/1.webp" alt="hero_image" class="img-fluid" onclick="openModal(0)"/>
+        </div>
+        <div class="hero_item2">
+          <img src="assets/img/2.webp" alt="hero_image" class="img-fluid" onclick="openModal(1)"/>
+        </div>
+        <div class="hero_item3">
+          <img src="assets/img/3.webp" alt="hero_image" class="img-fluid" onclick="openModal(2)"/>
         </div>
       </div>
+      <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <div class="thumbnails" id="thumbnails">
+          <img src="assets/img/1.webp" alt="Thumbnail 1" onclick="currentSlide(0)">
+          <img src="assets/img/2.webp" alt="Thumbnail 2" onclick="currentSlide(1)">
+          <img src="assets/img/3.webp" alt="Thumbnail 3" onclick="currentSlide(2)">
+      </div>
+    </div>
+
+  </div>
       <div class="sticky-menu" id="myStickyDiv">
         <div class="container">
           <ul>
@@ -195,7 +292,7 @@
             <li class="sticky-item">
               <a href="#addinfo" class="sticky-link">Additional info</a>
             </li>
-            <li class="sticky-item">
+            <!-- <li class="sticky-item">
               <a href="#nearby" class="sticky-link">Nearby places</a>
             </li>
             <li class="sticky-item">
@@ -206,7 +303,7 @@
             </li>
             <li class="sticky-item">
               <a href="#relatedarticle" class="sticky-link">Related Article</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -609,50 +706,146 @@
         <div class="container mt-4">
           <div class="card">
             <div class="card-body">
-              <h2 class="text-center mt-2 mb-4">Plan your visit to Bird Paradise</h2>
+              <h2 class="text-center mt-2 mb-4">
+                Plan your visit to Bird Paradise
+              </h2>
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="timings-tab" data-bs-toggle="tab" data-bs-target="#timings" type="button" role="tab" aria-controls="timings" aria-selected="false">Timings</button>
+                  <button
+                    class="nav-link"
+                    id="timings-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#timings"
+                    type="button"
+                    role="tab"
+                    aria-controls="timings"
+                    aria-selected="false"
+                  >
+                    Timings
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab" aria-controls="location" aria-selected="false">Location</button>
+                  <button
+                    class="nav-link"
+                    id="location-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#location"
+                    type="button"
+                    role="tab"
+                    aria-controls="location"
+                    aria-selected="false"
+                  >
+                    Location
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="facilities-tab" data-bs-toggle="tab" data-bs-target="#facilities" type="button" role="tab" aria-controls="facilities" aria-selected="false">Facilities</button>
+                  <button
+                    class="nav-link"
+                    id="facilities-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#facilities"
+                    type="button"
+                    role="tab"
+                    aria-controls="facilities"
+                    aria-selected="false"
+                  >
+                    Facilities
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="tips-tab" data-bs-toggle="tab" data-bs-target="#tips" type="button" role="tab" aria-controls="tips" aria-selected="false">Tips</button>
+                  <button
+                    class="nav-link"
+                    id="tips-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#tips"
+                    type="button"
+                    role="tab"
+                    aria-controls="tips"
+                    aria-selected="false"
+                  >
+                    Tips
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="rules-tab" data-bs-toggle="tab" data-bs-target="#rules" type="button" role="tab" aria-controls="rules" aria-selected="true">Rules & regulations</button>
+                  <button
+                    class="nav-link active"
+                    id="rules-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#rules"
+                    type="button"
+                    role="tab"
+                    aria-controls="rules"
+                    aria-selected="true"
+                  >
+                    Rules & regulations
+                  </button>
                 </li>
               </ul>
               <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade" id="timings" role="tabpanel" aria-labelledby="timings-tab">
+                <div
+                  class="tab-pane fade"
+                  id="timings"
+                  role="tabpanel"
+                  aria-labelledby="timings-tab"
+                >
                   <p>Timings content goes here.</p>
                 </div>
-                <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
+                <div
+                  class="tab-pane fade"
+                  id="location"
+                  role="tabpanel"
+                  aria-labelledby="location-tab"
+                >
                   <p>Location content goes here.</p>
                 </div>
-                <div class="tab-pane fade" id="facilities" role="tabpanel" aria-labelledby="facilities-tab">
+                <div
+                  class="tab-pane fade"
+                  id="facilities"
+                  role="tabpanel"
+                  aria-labelledby="facilities-tab"
+                >
                   <p>Facilities content goes here.</p>
                 </div>
-                <div class="tab-pane fade" id="tips" role="tabpanel" aria-labelledby="tips-tab">
+                <div
+                  class="tab-pane fade"
+                  id="tips"
+                  role="tabpanel"
+                  aria-labelledby="tips-tab"
+                >
                   <p>Tips content goes here.</p>
                 </div>
-                <div class="tab-pane fade show active" id="rules" role="tabpanel" aria-labelledby="rules-tab">
+                <div
+                  class="tab-pane fade show active"
+                  id="rules"
+                  role="tabpanel"
+                  aria-labelledby="rules-tab"
+                >
                   <div class="container">
                     <div class="row">
                       <div class="col-md-6">
-                        <img src="./assets/img/wv1.JPG" alt="Rules" class="img-fluid fixed-size2">
+                        <img
+                          src="./assets/img/wv1.JPG"
+                          alt="Rules"
+                          class="img-fluid fixed-size2"
+                        />
                       </div>
                       <div class="col-md-6">
                         <ul>
                           <li>You are not allowed into prohibited areas.</li>
                           <li>Treat the birds with kindness and respect.</li>
-                          <li>Flash photography is not allowed as it might disturb the birds in their natural environment.</li>
-                          <li>Shooting videos or clicking still pictures for commercial purposes without prior permission is not allowed.</li>
-                          <li>Smoking is not allowed. You can use a designated smoking area outside the park entrance.</li>
+                          <li>
+                            Flash photography is not allowed as it might disturb
+                            the birds in their natural environment.
+                          </li>
+                          <li>
+                            Shooting videos or clicking still pictures for
+                            commercial purposes without prior permission is not
+                            allowed.
+                          </li>
+                          <li>
+                            Smoking is not allowed. You can use a designated
+                            smoking area outside the park entrance.
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -663,54 +856,149 @@
           </div>
         </div>
         <div class="container mt-4">
-            <div class="card">
-              <div class="card-body">
-                <h2 class="text-center mt-2 mb-4">Plan your visit to Bird Paradise</h2>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="timings-tab" data-bs-toggle="tab" data-bs-target="#timings" type="button" role="tab" aria-controls="timings" aria-selected="false">Timings</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab" aria-controls="location" aria-selected="false">Location</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="facilities-tab" data-bs-toggle="tab" data-bs-target="#facilities" type="button" role="tab" aria-controls="facilities" aria-selected="false">Facilities</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tips-tab" data-bs-toggle="tab" data-bs-target="#tips" type="button" role="tab" aria-controls="tips" aria-selected="false">Tips</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="rules-tab" data-bs-toggle="tab" data-bs-target="#rules" type="button" role="tab" aria-controls="rules" aria-selected="true">Rules & regulations</button>
-                  </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade" id="timings" role="tabpanel" aria-labelledby="timings-tab">
-                    <p>Timings content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
-                    <p>Location content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade" id="facilities" role="tabpanel" aria-labelledby="facilities-tab">
-                    <p>Facilities content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade" id="tips" role="tabpanel" aria-labelledby="tips-tab">
-                    <p>Tips content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade show active" id="rules" role="tabpanel" aria-labelledby="rules-tab">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img src="./assets/img/wv1.JPG" alt="Rules" class="img-fluid fixed-size2">
-                        </div>
-                        <div class="col-md-6">
-                          <ul>
-                            <li>You are not allowed into prohibited areas.</li>
-                            <li>Treat the birds with kindness and respect.</li>
-                            <li>Flash photography is not allowed as it might disturb the birds in their natural environment.</li>
-                            <li>Shooting videos or clicking still pictures for commercial purposes without prior permission is not allowed.</li>
-                            <li>Smoking is not allowed. You can use a designated smoking area outside the park entrance.</li>
-                          </ul>
-                        </div>
+          <div class="card">
+            <div class="card-body">
+              <h2 class="text-center mt-2 mb-4">
+                Plan your visit to Bird Paradise
+              </h2>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="timings-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#timings"
+                    type="button"
+                    role="tab"
+                    aria-controls="timings"
+                    aria-selected="false"
+                  >
+                    Timings
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="location-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#location"
+                    type="button"
+                    role="tab"
+                    aria-controls="location"
+                    aria-selected="false"
+                  >
+                    Location
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="facilities-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#facilities"
+                    type="button"
+                    role="tab"
+                    aria-controls="facilities"
+                    aria-selected="false"
+                  >
+                    Facilities
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tips-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#tips"
+                    type="button"
+                    role="tab"
+                    aria-controls="tips"
+                    aria-selected="false"
+                  >
+                    Tips
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="rules-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#rules"
+                    type="button"
+                    role="tab"
+                    aria-controls="rules"
+                    aria-selected="true"
+                  >
+                    Rules & regulations
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div
+                  class="tab-pane fade"
+                  id="timings"
+                  role="tabpanel"
+                  aria-labelledby="timings-tab"
+                >
+                  <p>Timings content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="location"
+                  role="tabpanel"
+                  aria-labelledby="location-tab"
+                >
+                  <p>Location content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="facilities"
+                  role="tabpanel"
+                  aria-labelledby="facilities-tab"
+                >
+                  <p>Facilities content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="tips"
+                  role="tabpanel"
+                  aria-labelledby="tips-tab"
+                >
+                  <p>Tips content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade show active"
+                  id="rules"
+                  role="tabpanel"
+                  aria-labelledby="rules-tab"
+                >
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img
+                          src="./assets/img/wv1.JPG"
+                          alt="Rules"
+                          class="img-fluid fixed-size2"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <ul>
+                          <li>You are not allowed into prohibited areas.</li>
+                          <li>Treat the birds with kindness and respect.</li>
+                          <li>
+                            Flash photography is not allowed as it might disturb
+                            the birds in their natural environment.
+                          </li>
+                          <li>
+                            Shooting videos or clicking still pictures for
+                            commercial purposes without prior permission is not
+                            allowed.
+                          </li>
+                          <li>
+                            Smoking is not allowed. You can use a designated
+                            smoking area outside the park entrance.
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -718,55 +1006,151 @@
               </div>
             </div>
           </div>
-          <div class="container mt-4 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <h2 class="text-center mt-2 mb-4">Plan your visit to Bird Paradise</h2>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="timings-tab" data-bs-toggle="tab" data-bs-target="#timings" type="button" role="tab" aria-controls="timings" aria-selected="false">Timings</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab" aria-controls="location" aria-selected="false">Location</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="facilities-tab" data-bs-toggle="tab" data-bs-target="#facilities" type="button" role="tab" aria-controls="facilities" aria-selected="false">Facilities</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tips-tab" data-bs-toggle="tab" data-bs-target="#tips" type="button" role="tab" aria-controls="tips" aria-selected="false">Tips</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="rules-tab" data-bs-toggle="tab" data-bs-target="#rules" type="button" role="tab" aria-controls="rules" aria-selected="true">Rules & regulations</button>
-                  </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade" id="timings" role="tabpanel" aria-labelledby="timings-tab">
-                    <p>Timings content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
-                    <p>Location content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade" id="facilities" role="tabpanel" aria-labelledby="facilities-tab">
-                    <p>Facilities content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade" id="tips" role="tabpanel" aria-labelledby="tips-tab">
-                    <p>Tips content goes here.</p>
-                  </div>
-                  <div class="tab-pane fade show active" id="rules" role="tabpanel" aria-labelledby="rules-tab">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <img src="./assets/img/wv1.JPG" alt="Rules" class="img-fluid fixed-size2">
-                        </div>
-                        <div class="col-md-6">
-                          <ul>
-                            <li>You are not allowed into prohibited areas.</li>
-                            <li>Treat the birds with kindness and respect.</li>
-                            <li>Flash photography is not allowed as it might disturb the birds in their natural environment.</li>
-                            <li>Shooting videos or clicking still pictures for commercial purposes without prior permission is not allowed.</li>
-                            <li>Smoking is not allowed. You can use a designated smoking area outside the park entrance.</li>
-                          </ul>
-                        </div>
+        </div>
+        <div class="container mt-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="text-center mt-2 mb-4">
+                Plan your visit to Bird Paradise
+              </h2>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="timings-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#timings"
+                    type="button"
+                    role="tab"
+                    aria-controls="timings"
+                    aria-selected="false"
+                  >
+                    Timings
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="location-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#location"
+                    type="button"
+                    role="tab"
+                    aria-controls="location"
+                    aria-selected="false"
+                  >
+                    Location
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="facilities-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#facilities"
+                    type="button"
+                    role="tab"
+                    aria-controls="facilities"
+                    aria-selected="false"
+                  >
+                    Facilities
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tips-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#tips"
+                    type="button"
+                    role="tab"
+                    aria-controls="tips"
+                    aria-selected="false"
+                  >
+                    Tips
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="rules-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#rules"
+                    type="button"
+                    role="tab"
+                    aria-controls="rules"
+                    aria-selected="true"
+                  >
+                    Rules & regulations
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div
+                  class="tab-pane fade"
+                  id="timings"
+                  role="tabpanel"
+                  aria-labelledby="timings-tab"
+                >
+                  <p>Timings content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="location"
+                  role="tabpanel"
+                  aria-labelledby="location-tab"
+                >
+                  <p>Location content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="facilities"
+                  role="tabpanel"
+                  aria-labelledby="facilities-tab"
+                >
+                  <p>Facilities content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="tips"
+                  role="tabpanel"
+                  aria-labelledby="tips-tab"
+                >
+                  <p>Tips content goes here.</p>
+                </div>
+                <div
+                  class="tab-pane fade show active"
+                  id="rules"
+                  role="tabpanel"
+                  aria-labelledby="rules-tab"
+                >
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img
+                          src="./assets/img/wv1.JPG"
+                          alt="Rules"
+                          class="img-fluid fixed-size2"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <ul>
+                          <li>You are not allowed into prohibited areas.</li>
+                          <li>Treat the birds with kindness and respect.</li>
+                          <li>
+                            Flash photography is not allowed as it might disturb
+                            the birds in their natural environment.
+                          </li>
+                          <li>
+                            Shooting videos or clicking still pictures for
+                            commercial purposes without prior permission is not
+                            allowed.
+                          </li>
+                          <li>
+                            Smoking is not allowed. You can use a designated
+                            smoking area outside the park entrance.
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -774,6 +1158,7 @@
               </div>
             </div>
           </div>
+        </div>
       </section>
       <section class="sticky-section" id="addinfo">
         <h2 class="text-center mt-2 mb-4">Additional info</h2>
@@ -944,7 +1329,7 @@
             </div>
           </div>
           <button
-            class="carousel-control-prev "
+            class="carousel-control-prev"
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="prev"
@@ -953,7 +1338,7 @@
             <span class="visually-hidden">Previous</span>
           </button>
           <button
-            class="carousel-control-next "
+            class="carousel-control-next"
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="next"
@@ -964,136 +1349,140 @@
         </div>
       </section>
       <section class="sticky-section" id="faq">
-        <h2 class="text-center mt-2 mb-4">FAQ</h2>
-        <div class="container md-5">
-          <div class="accordion" id="faqAccordion">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  What is the best time to visit India?
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                class="accordion-collapse collapse show"
-                aria-labelledby="headingOne"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  The best time to visit India is during the winter months, from
-                  October to March, when the weather is pleasant and ideal for
-                  sightseeing.
+        <div class="card m-4">
+          <div class="card-body">
+            <h2 class="text-center">FAQ</h2>
+            <div class="container">
+              <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                    >
+                      What is the best time to visit India?
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseOne"
+                    class="accordion-collapse collapse show"
+                    aria-labelledby="headingOne"
+                    data-bs-parent="#faqAccordion"
+                  >
+                    <div class="accordion-body">
+                      The best time to visit India is during the winter months,
+                      from October to March, when the weather is pleasant and
+                      ideal for sightseeing.
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Do I need a visa to travel to India?
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingTwo"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Yes, most travelers need a visa to enter India. You can apply
-                  for an e-visa online or get a visa from the Indian embassy or
-                  consulate in your country.
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                    >
+                      Do I need a visa to travel to India?
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseTwo"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingTwo"
+                    data-bs-parent="#faqAccordion"
+                  >
+                    <div class="accordion-body">
+                      Yes, most travelers need a visa to enter India. You can
+                      apply for an e-visa online or get a visa from the Indian
+                      embassy or consulate in your country.
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  What are the must-visit places in India?
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingThree"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Some of the must-visit places in India include the Taj Mahal
-                  in Agra, Jaipur's palaces, Kerala's backwaters, and the
-                  beaches of Goa.
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                    >
+                      What are the must-visit places in India?
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseThree"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingThree"
+                    data-bs-parent="#faqAccordion"
+                  >
+                    <div class="accordion-body">
+                      Some of the must-visit places in India include the Taj
+                      Mahal in Agra, Jaipur's palaces, Kerala's backwaters, and
+                      the beaches of Goa.
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingFour">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFour"
-                  aria-expanded="false"
-                  aria-controls="collapseFour"
-                >
-                  Is it safe to travel to India?
-                </button>
-              </h2>
-              <div
-                id="collapseFour"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingFour"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  India is generally safe for travelers, but it's important to
-                  take standard precautions, such as avoiding isolated areas at
-                  night and being aware of your surroundings.
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingFour">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseFour"
+                      aria-expanded="false"
+                      aria-controls="collapseFour"
+                    >
+                      Is it safe to travel to India?
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseFour"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingFour"
+                    data-bs-parent="#faqAccordion"
+                  >
+                    <div class="accordion-body">
+                      India is generally safe for travelers, but it's important
+                      to take standard precautions, such as avoiding isolated
+                      areas at night and being aware of your surroundings.
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingFive">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFive"
-                  aria-expanded="false"
-                  aria-controls="collapseFive"
-                >
-                  What is the currency used in India?
-                </button>
-              </h2>
-              <div
-                id="collapseFive"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingFive"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  The currency used in India is the Indian Rupee (INR). It's
-                  advisable to carry some cash, especially in smaller towns and
-                  rural areas.
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingFive">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseFive"
+                      aria-expanded="false"
+                      aria-controls="collapseFive"
+                    >
+                      What is the currency used in India?
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseFive"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="headingFive"
+                    data-bs-parent="#faqAccordion"
+                  >
+                    <div class="accordion-body">
+                      The currency used in India is the Indian Rupee (INR). It's
+                      advisable to carry some cash, especially in smaller towns
+                      and rural areas.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1222,7 +1611,7 @@
             </div>
           </div>
           <button
-            class="carousel-control-prev "
+            class="carousel-control-prev"
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="prev"
@@ -1231,7 +1620,7 @@
             <span class="visually-hidden">Previous</span>
           </button>
           <button
-            class="carousel-control-next "
+            class="carousel-control-next"
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="next"
@@ -1251,12 +1640,20 @@
                   <div class="card">
                     <div class="row g-0">
                       <div class="col-4">
-                        <img src="./assets/img/wv1.JPG" class="img-fluid rounded-start" alt="Article 1">
+                        <img
+                          src="./assets/img/wv1.JPG"
+                          class="img-fluid rounded-start"
+                          alt="Article 1"
+                        />
                       </div>
                       <div class="col-8">
                         <div class="card-body">
-                          <h5 class="card-title">Good Financial Habits For Easy Loan Approval</h5>
-                          <p class="card-text"><small class="text-muted">13726 | 2 min read</small></p>
+                          <h5 class="card-title">
+                            Good Financial Habits For Easy Loan Approval
+                          </h5>
+                          <p class="card-text">
+                            <small class="text-muted">13726 | 2 min read</small>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1266,12 +1663,20 @@
                   <div class="card">
                     <div class="row g-0">
                       <div class="col-4">
-                        <img src="./assets/img/wv1.JPG" class="img-fluid rounded-start" alt="Article 2">
+                        <img
+                          src="./assets/img/wv1.JPG"
+                          class="img-fluid rounded-start"
+                          alt="Article 2"
+                        />
                       </div>
                       <div class="col-8">
                         <div class="card-body">
-                          <h5 class="card-title">All you need to know about online loans</h5>
-                          <p class="card-text"><small class="text-muted">19563 | 3 min read</small></p>
+                          <h5 class="card-title">
+                            All you need to know about online loans
+                          </h5>
+                          <p class="card-text">
+                            <small class="text-muted">19563 | 3 min read</small>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1281,12 +1686,20 @@
                   <div class="card">
                     <div class="row g-0">
                       <div class="col-4">
-                        <img src="./assets/img/wv1.JPG" class="img-fluid rounded-start" alt="Article 3">
+                        <img
+                          src="./assets/img/wv1.JPG"
+                          class="img-fluid rounded-start"
+                          alt="Article 3"
+                        />
                       </div>
                       <div class="col-8">
                         <div class="card-body">
-                          <h5 class="card-title">Smart ways to manage your Personal Loans</h5>
-                          <p class="card-text"><small class="text-muted">16771 | 2 min read</small></p>
+                          <h5 class="card-title">
+                            Smart ways to manage your Personal Loans
+                          </h5>
+                          <p class="card-text">
+                            <small class="text-muted">16771 | 2 min read</small>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1296,12 +1709,21 @@
                   <div class="card">
                     <div class="row g-0">
                       <div class="col-4">
-                        <img src="./assets/img/wv1.JPG" class="img-fluid rounded-start" alt="Article 4">
+                        <img
+                          src="./assets/img/wv1.JPG"
+                          class="img-fluid rounded-start"
+                          alt="Article 4"
+                        />
                       </div>
                       <div class="col-8">
                         <div class="card-body">
-                          <h5 class="card-title">Questions you should be asking before availing of a Personal Loan</h5>
-                          <p class="card-text"><small class="text-muted">23446 | 2 min read</small></p>
+                          <h5 class="card-title">
+                            Questions you should be asking before availing of a
+                            Personal Loan
+                          </h5>
+                          <p class="card-text">
+                            <small class="text-muted">23446 | 2 min read</small>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1312,70 +1734,70 @@
           </div>
         </div>
       </section>
-        <div class="blockcode bg-light">
-            <footer class="page-footer shadow">
-              <div class="d-flex flex-column mx-auto py-5" style="width: 80%">
-                <div class="d-flex flex-wrap justify-content-between">
-                  <div>
-                    <a href="/#" class="d-flex align-items-center p-0 text-dark">
-                      <img alt="logo" src="./assets/img/1.webp" width="30px" />
-                      <span class="ms-3 h5 font-weight-bold">XYZ</span>
-                    </a>
-                    <p class="my-3" style="width: 250px">
-                      We are creating High Quality Resources and tools to Aid developers during the
-                      developement of their projects
-                    </p>
-                  </div>
-                  <div>
-                    <p class="h5 mb-4" style="font-weight: 600">XYZ</p>
-                    <ul class="p-0" style="list-style: none; cursor: pointer">
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Resources</a>
-                      </li>
-                      <li class="my-2">
-                        <a class="text-dark" href="/">About Us</a>
-                      </li>
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Contact</a>
-                      </li>
-                      <li class="my-2"><a class="text-dark" href="/">Blog</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <p class="h5 mb-4" style="font-weight: 600">Help</p>
-                    <ul class="p-0" style="list-style: none; cursor: pointer">
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Support</a>
-                      </li>
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Sign Up</a>
-                      </li>
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Sign In</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <p class="h5 mb-4" style="font-weight: 600">Help</p>
-                    <ul class="p-0" style="list-style: none; cursor: pointer">
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Support</a>
-                      </li>
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Sign Up</a>
-                      </li>
-                      <li class="my-2">
-                        <a class="text-dark" href="/">Sign In</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="text-center mt-4">
-                  <small>&copy; Devwares, 2020. All rights reserved.</small>
-                </div>
+      <div class="blockcode bg-light">
+        <footer class="page-footer shadow">
+          <div class="d-flex flex-column mx-auto py-5" style="width: 80%">
+            <div class="d-flex flex-wrap justify-content-between">
+              <div>
+                <a href="/#" class="d-flex align-items-center p-0 text-dark">
+                  <img alt="logo" src="./assets/img/1.webp" width="30px" />
+                  <span class="ms-3 h5 font-weight-bold">XYZ</span>
+                </a>
+                <p class="my-3" style="width: 250px">
+                  We are creating High Quality Resources and tools to Aid
+                  developers during the developement of their projects
+                </p>
               </div>
-            </footer>
+              <div>
+                <p class="h5 mb-4" style="font-weight: 600">XYZ</p>
+                <ul class="p-0" style="list-style: none; cursor: pointer">
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Resources</a>
+                  </li>
+                  <li class="my-2">
+                    <a class="text-dark" href="/">About Us</a>
+                  </li>
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Contact</a>
+                  </li>
+                  <li class="my-2"><a class="text-dark" href="/">Blog</a></li>
+                </ul>
+              </div>
+              <div>
+                <p class="h5 mb-4" style="font-weight: 600">Help</p>
+                <ul class="p-0" style="list-style: none; cursor: pointer">
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Support</a>
+                  </li>
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Sign Up</a>
+                  </li>
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Sign In</a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <p class="h5 mb-4" style="font-weight: 600">Help</p>
+                <ul class="p-0" style="list-style: none; cursor: pointer">
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Support</a>
+                  </li>
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Sign Up</a>
+                  </li>
+                  <li class="my-2">
+                    <a class="text-dark" href="/">Sign In</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <small>&copy; Devwares, 2020. All rights reserved.</small>
+            </div>
           </div>
+        </footer>
+      </div>
     </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -1411,6 +1833,41 @@
           });
         });
       });
+
+      let currentSlideIndex = 0;
+    const images = [
+        "assets/img/1.webp",
+        "assets/img/2.webp",
+        "assets/img/3.webp"
+    ];
+
+    function openModal(index) {
+        currentSlideIndex = index;
+        document.getElementById('myModal').style.display = "flex";
+        updateModalImage();
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    function changeSlide(n) {
+        currentSlideIndex = (currentSlideIndex + n + images.length) % images.length;
+        updateModalImage();
+    }
+
+    function currentSlide(index) {
+        currentSlideIndex = index;
+        updateModalImage();
+    }
+    function updateModalImage() {
+    document.getElementById('modalImage').src = images[currentSlideIndex];
+    const thumbnails = document.getElementById('thumbnails').children;
+    for (let i = 0; i < thumbnails.length; i++) {
+        thumbnails[i].classList.remove('active');
+    }
+    thumbnails[currentSlideIndex].classList.add('active');
+}
     </script>
   </body>
 </html>
