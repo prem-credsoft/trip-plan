@@ -9,6 +9,7 @@ h1, h2{
 body{
     background-color: #e5eaf7;
     min-height: 700vh;
+    font-family: 'Rubik', sans-serif;
 }
 a{
     color:#000;
