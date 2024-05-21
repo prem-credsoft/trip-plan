@@ -19,6 +19,87 @@
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
+    <style>
+      body {
+          font-family: 'Rubik', sans-serif;
+          margin: 0;
+          padding: 0;
+      }
+      .container {
+          display: flex;
+          gap: 10px;
+      }
+      .container img {
+          cursor: pointer;
+          width: 100%;
+          height: auto;
+      }
+      .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* display: flex; */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+      .modal-content {
+          margin: auto;
+          display: block;
+          width: 80%;
+          max-width: 700px;
+      }
+      .close {
+          position: absolute;
+          top: 15px;
+          right: 35px;
+          color: #fff;
+          font-size: 40px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+      .prev, .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -50px;
+          color: white;
+          font-weight: bold;
+          font-size: 20px;
+          transition: 0.6s ease;
+          user-select: none;
+      }
+      .prev {
+          left: 0;
+      }
+      .next {
+          right: 0;
+      }
+      .thumbnails {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+      }
+      .thumbnails img {
+          width: 100px;
+          height: auto;
+          margin: 0 5px;
+          cursor: pointer;
+          opacity: 0.6;
+      }
+      .thumbnails img.active {
+          border: 2px solid #fff;
+          opacity: 1;
+      }
+  </style>
   </head>
   <body style="font-family: 'Rubik', sans-serif">
     <div class="header">
@@ -166,20 +247,33 @@
         </div>
       </div>
     </div>
-    <div class="main">
-      <div class="container">
-        <div class="hero_carousel">
-          <div class="hero_item1">
-            <img src="assets/img/1.webp" alt="hero_image" class="img-fluid" />
-          </div>
-          <div class="hero_item2">
-            <img src="assets/img/2.webp" alt="hero_image" class="img-fluid" />
-          </div>
-          <div class="hero_item3">
-            <img src="assets/img/3.webp" alt="hero_image" class="img-fluid" />
-          </div>
+
+
+    <div class="container">
+      <div class="hero_carousel">
+        <div class="hero_item1">
+          <img src="assets/img/1.webp" alt="hero_image" class="img-fluid" onclick="openModal(0)"/>
+        </div>
+        <div class="hero_item2">
+          <img src="assets/img/2.webp" alt="hero_image" class="img-fluid" onclick="openModal(1)"/>
+        </div>
+        <div class="hero_item3">
+          <img src="assets/img/3.webp" alt="hero_image" class="img-fluid" onclick="openModal(2)"/>
         </div>
       </div>
+      <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <div class="thumbnails" id="thumbnails">
+          <img src="assets/img/1.webp" alt="Thumbnail 1" onclick="currentSlide(0)">
+          <img src="assets/img/2.webp" alt="Thumbnail 2" onclick="currentSlide(1)">
+          <img src="assets/img/3.webp" alt="Thumbnail 3" onclick="currentSlide(2)">
+      </div>
+    </div>
+
+  </div>
       <div class="sticky-menu" id="myStickyDiv">
         <div class="container">
           <ul>
@@ -198,7 +292,7 @@
             <li class="sticky-item">
               <a href="#addinfo" class="sticky-link">Additional info</a>
             </li>
-            <li class="sticky-item">
+            <!-- <li class="sticky-item">
               <a href="#nearby" class="sticky-link">Nearby places</a>
             </li>
             <li class="sticky-item">
@@ -209,7 +303,7 @@
             </li>
             <li class="sticky-item">
               <a href="#relatedarticle" class="sticky-link">Related Article</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -1739,6 +1833,41 @@
           });
         });
       });
+
+      let currentSlideIndex = 0;
+    const images = [
+        "assets/img/1.webp",
+        "assets/img/2.webp",
+        "assets/img/3.webp"
+    ];
+
+    function openModal(index) {
+        currentSlideIndex = index;
+        document.getElementById('myModal').style.display = "flex";
+        updateModalImage();
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    function changeSlide(n) {
+        currentSlideIndex = (currentSlideIndex + n + images.length) % images.length;
+        updateModalImage();
+    }
+
+    function currentSlide(index) {
+        currentSlideIndex = index;
+        updateModalImage();
+    }
+    function updateModalImage() {
+    document.getElementById('modalImage').src = images[currentSlideIndex];
+    const thumbnails = document.getElementById('thumbnails').children;
+    for (let i = 0; i < thumbnails.length; i++) {
+        thumbnails[i].classList.remove('active');
+    }
+    thumbnails[currentSlideIndex].classList.add('active');
+}
     </script>
   </body>
 </html>
