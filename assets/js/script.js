@@ -33,10 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     subnavItems.forEach((item, index) => {
         item.addEventListener('click', function() {
-            // Hide all submenu items
             submenuItems.forEach(sub => sub.style.display = 'none');
-
-            // Show the corresponding submenu item
             submenuItems[index].style.display = 'flex';
         });
     });
@@ -52,10 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const menulevel3 = document.querySelector('.mm-level3');
 
     mobile_menu_button.addEventListener('click', function() {
-      menu.classList.toggle('hidden');
+        menu.classList.toggle('hidden');
+        document.body.classList.toggle('no-scroll');
     });
     mobile_menu_close.addEventListener('click', function() {
         menu.classList.toggle('hidden');
+        document.body.classList.toggle('no-scroll');
     });
     mobile_level2_close.addEventListener('click', function() {
         menulevel2.classList.toggle('hidden');

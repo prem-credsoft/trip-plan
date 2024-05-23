@@ -303,7 +303,6 @@ p{
     height: 300px;
     object-fit: cover;
 }
-
 .cards-wrapper {
     display: flex;
     justify-content: center;
@@ -335,3 +334,6 @@ p{
       height: 11em;
     }
   }
+.no-scroll {
+    overflow: hidden;
+}
