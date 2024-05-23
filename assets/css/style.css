@@ -46,6 +46,11 @@ a{
     background-color: #8ecae6;
     padding: 0;
 }
+@media only screen and (max-width: 768px) {
+    .navbar{
+        display: none;
+    }
+}
 .navbar .nav a{
     text-decoration: none;
     font-weight: 400;
@@ -147,6 +152,12 @@ p{
     border-radius: 20px;
     overflow: hidden;
 }
+@media only screen and (max-width: 768px) {
+    .hero_carousel{
+        margin: 10px 0px;
+        border-radius: 10px;
+    }
+}
 .hero_item1 {
     background-color: #023047;
     grid-column: 1 / 2; /* First column */
@@ -191,6 +202,7 @@ p{
     font-weight: 600;
     margin: 5px 0;
     border: 1px solid transparent;
+    width: max-content;
 }
 .sticky-menu ul li a.active {
     border: 1px solid #008cff;
