@@ -84,6 +84,8 @@ a{
     }
     .mm-level1 li span{
         display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     .mm-level2, .mm-level3{
         position: absolute;
@@ -103,11 +105,24 @@ a{
     }
     .mobile-menu-content li span{
         padding: 14px 0;
+        justify-content: space-between;
+        align-items: center;
     }
+    .rightarrow::after{
+        content: '';
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 8 12" fill="currentColor" aria-hidden="true"%3E%3Cpath d="M1.08921 0.148971C1.03905 0.106489 0.981007 0.074303 0.918404 0.0542515C0.8558 0.0341999 0.78986 0.0266754 0.724348 0.0321076C0.592041 0.0430785 0.469511 0.106159 0.383714 0.207471C0.297916 0.308784 0.255879 0.44003 0.26685 0.572337C0.277821 0.704644 0.340901 0.827174 0.442214 0.912971L6.46021 5.99997L0.442214 11.087C0.340901 11.1728 0.277821 11.2953 0.26685 11.4276C0.255879 11.5599 0.297916 11.6912 0.383714 11.7925C0.469511 11.8938 0.592041 11.9569 0.724348 11.9678C0.856655 11.9788 0.987901 11.9368 1.08921 11.851L7.55821 6.38197C7.61379 6.33504 7.65846 6.27654 7.68909 6.21056C7.71973 6.14458 7.73561 6.07272 7.73561 5.99997C7.73561 5.92723 7.71973 5.85536 7.68909 5.78938C7.65846 5.7234 7.61379 5.66491 7.55821 5.61797L1.08921 0.148971Z"%3E%3C/path%3E%3C/svg%3E');
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 8px; /* Adjust spacing as needed */
+        vertical-align: middle;
+      }
 }
 .hidden {
     display: none;
-  }
+}
 .navbar .nav a{
     text-decoration: none;
     font-weight: 400;
