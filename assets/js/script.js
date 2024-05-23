@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     mobile_menu_close.addEventListener('click', function() {
         menu.classList.toggle('hidden');
+        menulevel2.classList.toggle('hidden');
+        menulevel3.classList.toggle('hidden');
         document.body.classList.toggle('no-scroll');
     });
     mobile_level2_close.addEventListener('click', function() {
