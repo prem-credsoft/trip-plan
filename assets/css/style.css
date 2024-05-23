@@ -46,6 +46,10 @@ a{
 .navbar .nav a{
     text-decoration: none;
     font-weight: 400;
+    padding: 8px;
+}
+.navbar .nav a:hover{
+    color: #008cff;
 }
 .navbar .nav .nav-link{
     padding: 8px 20px;
@@ -62,12 +66,21 @@ a{
     position: absolute;
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
-    max-width: 992px;
     margin-top: 15px;
     border-radius: 10px;
 }
 .nav-item:first-child .submenu{
-    width: 800px;
+    min-width: 900px;
+}
+.nav-item:nth-child(2) .submenu{
+    width: 700px;
+}
+.nav-item:nth-child(3) .submenu{
+    width: 700px;
+}
+.nav-item:nth-child(4) .submenu{
+    width: 900px;
+    margin-left: -300px;
 }
 .border-right{
     border-right: 1px solid #ddd;
@@ -95,13 +108,33 @@ a{
     display: flex;
 }
 .submenu2-item h3{
+    font-size: 18px;
     border-bottom: 1px solid #ccc;
 }
 .submenu2 a div{
-    padding: 10px  0;
+    padding: 10px 0;
 }
-.sub-nav-item a{
+.submenu2-column{
+    padding: 25px;
     display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.submenu2-column img{
+    max-width: 100px;
+}
+.sub-nav-item img{
+    width: 100px;
+    border-radius: 10px;
+}
+.submenu2 .sub-nav-item a{
+    display: flex;
+}
+.submenu2 .sub-nav-item a:hover{
+    background-color: #eeeeee;
+}
+p{
+    padding-left: 10px;
 }
 .hero_carousel{
     display: grid;
@@ -165,10 +198,6 @@ a{
     width: 100%;
     z-index: 1000; /* Ensures it stays on top */
 }
-/* section{
-    min-height: 500px;
-    border: 1px solid;
-} */
 /* sticky menu */
 
 .fixed-size {
