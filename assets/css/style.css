@@ -10,6 +10,8 @@ body{
     background-color: #e5eaf7;
     min-height: 700vh;
     font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 a{
     color:#000;
@@ -31,6 +33,7 @@ a{
 .topbar{
     background-color: #023047;
     padding: 10px 0;
+    transition: all 0.3s ease-in-out;
 }
 .topbar .logo img{
     height: 40px;
@@ -169,7 +172,11 @@ p{
 .sticky-menu{
     background-color: #fff;
     transition: all 0.3s ease;
-    position: relative;
+    position: relative;   
+    transition: all 0.3s ease-in-out;
+}
+.sticky-menu.sticky{
+    top: 60px;
 }
 .sticky-menu ul{
     list-style: none;
@@ -193,10 +200,10 @@ p{
 }
 .sticky {
     position: fixed;
-    top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensures it stays on top */
+    z-index: 10; /* Ensures it stays on top */
+    transform: translateY(0);
 }
 /* sticky menu */
 

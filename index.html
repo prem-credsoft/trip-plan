@@ -11,21 +11,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Rubik', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
     .container {
       display: flex;
       gap: 10px;
     }
 
-    .container img {
+    .hero_carousel img {
       cursor: pointer;
       width: 100%;
-      height: auto;
     }
 
     .modal {
@@ -105,9 +98,9 @@
   </style>
 </head>
 
-<body style="font-family: 'Rubik', sans-serif">
+<body>
   <div class="header">
-    <div class="topbar">
+    <div class="topbar" id="myStickyDiv">
       <div class="container d-flex gap-5 align-items-center">
         <div class="logo">
           <img src="assets/img/logo.webp" />
@@ -631,7 +624,7 @@
     </div>
 
   </div>
-  <div class="sticky-menu" id="myStickyDiv">
+  <div class="sticky-menu overflow-x-scroll" id="myStickyDiv2">
     <div class="container">
       <ul>
         <li class="sticky-item">
@@ -665,7 +658,7 @@
     </div>
   </div>
   <section class="sticky-section" id="overview" >
-    <div class="card m-5 mt-5">
+    <div class="card m-md-5 m-2 mt-3">
       <div class="card-body">
         <h5 class="card-title">Bajaj Finserv in Bangalore</h5>
         <p class="card-text">
@@ -1849,12 +1842,22 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var stickyDiv = document.getElementById("myStickyDiv");
-      var stickyDivOffset = stickyDiv.getBoundingClientRect().top;
+      var stickyDivOffset = stickyDiv.getBoundingClientRect().top + 100;
       window.addEventListener("scroll", function () {
         if (stickyDivOffset <= window.scrollY) {
           stickyDiv.classList.add("sticky");
         } else {
           stickyDiv.classList.remove("sticky");
+        }
+      });
+
+      var stickyDiv2 = document.getElementById("myStickyDiv2");
+      var stickyDivOffset2 = stickyDiv2.getBoundingClientRect().top;
+      window.addEventListener("scroll", function () {
+        if (stickyDivOffset2 <= window.scrollY) {
+          stickyDiv2.classList.add("sticky");
+        } else {
+          stickyDiv2.classList.remove("sticky");
         }
       });
 
