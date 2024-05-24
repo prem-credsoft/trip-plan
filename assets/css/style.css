@@ -16,6 +16,9 @@ body{
 a{
     color:#000;
 }
+ol, ul {
+    padding-left: 1rem;
+}
 .btn-secondary{
     background-color: #fb8500;
 }
@@ -29,7 +32,30 @@ a{
 /*  - #ffb703 light orange */
 
 /* header START */
-
+.topbar{
+    z-index: 50;
+}
+.sticky-menu{
+    z-index: 10;
+}
+.mobile-search-modal{
+    z-index: 60;
+}
+.mobile-menu{
+    z-index: 70;
+    overflow-x: scroll;
+    padding-bottom: 80px;
+}
+.mm-level2{
+    z-index: 80;
+    overflow-x: scroll;
+    padding-bottom: 120px;
+}
+.mm-level3{
+    z-index: 80;
+    overflow-x: scroll;
+    padding-bottom: 100px;
+}
 .topbar{
     background-color: #023047;
     padding: 10px 0;
@@ -66,7 +92,6 @@ a{
     .mobile-menu{
         position: fixed;
         background-color: white;
-        z-index: 50;
         top: 0;
         left: 0;
         height: 100vh;
@@ -76,7 +101,6 @@ a{
     .mobile-search-modal{
         position: fixed;
         background-color: white;
-        z-index: 50;
         top: 60px;
         left: 0;
         width: 100%;
@@ -84,6 +108,13 @@ a{
     }
     .mobile-menu-content{
         margin-top: 30px;
+    }
+    .mobile-menu-content h3:first-child {
+        margin-top: 0px;
+    }
+    .mobile-menu-content h3 {
+        margin-top: 50px;
+        margin-bottom: 10px;
     }
     .mm-level1 li:first-child{
         border-top: 1px solid #aaa;
@@ -220,15 +251,26 @@ a{
     width: 100px;
     border-radius: 10px;
 }
+.mob-sub-nav-item{
+    border-color: #eee !important;
+    border-bottom: 1px solid #eee !important;
+    padding: 10px 0;
+    gap:20px;
+}
+.mob-sub-nav-item img{
+    width: 100px;
+    border-radius: 10px;
+    
+}
 .submenu2 .sub-nav-item a{
     display: flex;
 }
 .submenu2 .sub-nav-item a:hover{
     background-color: #eeeeee;
 }
-p{
+/* p{
     padding-left: 10px;
-}
+} */
 .hero_carousel{
     display: grid;
     grid-template-columns: 1.4fr 0.6fr; 
@@ -271,6 +313,9 @@ p{
     position: relative;   
     transition: all 0.3s ease-in-out;
 }
+.sticky-menu::-webkit-scrollbar {
+    display: none;
+}
 .sticky-menu.sticky{
     top: 60px;
 }
@@ -297,9 +342,9 @@ p{
 }
 .sticky {
     position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    z-index: 10; /* Ensures it stays on top */
     transform: translateY(0);
 }
 /* sticky menu */
@@ -320,15 +365,7 @@ p{
     display: flex;
     justify-content: center;
   }
-  .card {
-    margin: 0 0.5em;
-    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-    border: none;
-    border-radius: 0;
-  }
-  .carousel-inner {
-    padding: 1em;
-  }
+
   .carousel-control-prev,
   .carousel-control-next {
     background-color: #e1e1e1;
@@ -337,6 +374,9 @@ p{
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
+  }
+  .carousel-item .card{
+    margin: .5rem;
   }
 .no-scroll {
     overflow: hidden;
@@ -365,13 +405,7 @@ p{
 .read-more {
   color: #ff4500;
   text-decoration: none;
-}
-ore {
-    color: #ff4500;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
+} 
   .read-more:hover {
     text-decoration: underline;
   }
@@ -380,11 +414,17 @@ ore {
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
-  .card-body {
-    padding: 2rem;
+  .box-shadow{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+  /* .card-body {
+    padding: 2rem;
+  } */
+  @media only screen and (max-width: 768px) {
+    .card-body {
+        padding: 1.25rem;
+    }
+}
   h2 {
     margin-bottom: 1.5rem;
   }
@@ -404,4 +444,16 @@ ore {
   
   .accordion-button:not(.collapsed)::after {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M1 11l7-7 7 7'/%3E%3C/svg%3E");
+  }
+  .carousel-inner{
+    overflow: visible !important;
+  }
+  .carousel-item .cards-wrapper > .card{
+    top: 0px;
+    position: relative; /* Ensure position is relative for the top property to work */
+    transition: top 0.3s ease;
+  }
+  .carousel-item .cards-wrapper > .card:hover{
+    top: -20px;
+    box-shadow: 0 0 10px #bbb;
   }

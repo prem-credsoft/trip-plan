@@ -7,13 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         link.addEventListener('click', function(event) {
             event.preventDefault();
-            // Close any open submenus
             document.querySelectorAll('.submenu').forEach(sub => {
                 if (sub !== submenu) {
                     sub.style.display = 'none';
                 }
             });
-            // Toggle the clicked submenu
             submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
         });
     });
