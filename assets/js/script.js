@@ -41,13 +41,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     const mobile_menu_button = document.querySelector('.mobile-menu-button');
+    const mobile_search_button = document.querySelector('.mobile-search');
     const mobile_menu_close = document.querySelector('.mobile-menu-close');
     const mobile_level2_close = document.querySelector('.mobile-level2-close');
     const mobile_level3_close = document.querySelector('.mobile-level3-close');
     const menu = document.querySelector('.mobile-menu');
+    const mobile_search_modal = document.querySelector('.mobile-search-modal');
     const menulevel2 = document.querySelector('.mm-level2');
     const menulevel3 = document.querySelector('.mm-level3');
 
+    mobile_search_button.addEventListener('click', function() {
+        document.querySelector('.mobile-search-icon').classList.toggle('hidden');
+        document.querySelector('.mobile-search-close').classList.toggle('hidden');
+        mobile_search_modal.classList.toggle('hidden');
+    });
     mobile_menu_button.addEventListener('click', function() {
         menu.classList.toggle('hidden');
         document.body.classList.toggle('no-scroll');
