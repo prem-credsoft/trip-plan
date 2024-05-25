@@ -444,7 +444,7 @@ ol, ul {
   
   .accordion-item {
     border: none;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 10px solid #ffffff;
   }
   
   .accordion-button:focus {
