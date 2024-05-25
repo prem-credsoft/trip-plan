@@ -331,21 +331,18 @@ ol, ul {
     display: flex;
     text-decoration: none;
     font-weight: 600;
-    margin: 5px 0;
     border: 1px solid transparent;
     width: max-content;
 }
 .sticky-menu ul li a.active {
-    border: 1px solid #008cff;
-    border-radius: 4px;
-    background-color: rgb(234, 245, 255);
-    color: #008cff;
+    border-bottom: 3px solid #002a53;
+    color: #002a53;
 }
 @media only screen and (max-width: 768px) {
     .sticky-menu ul{
         justify-content: center;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        /* padding-top: 5px;
+        padding-bottom: 5px; */
     }
     .sticky-menu ul li a{
         padding: 5px 8px;
