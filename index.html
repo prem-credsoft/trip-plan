@@ -237,8 +237,6 @@
                         </div>
                       </div>
                     </li>
-
-
                       <li><span class="rightarrow">The Caribbean</span>
                         <div class="mm-level3 hidden">
                           <div class="mobile-menu-content">
@@ -1845,11 +1843,11 @@
       </div>
     </div>
   </section>
-  <section class="sticky-section" id="nearby">
+  <section class="sticky-section mt-4" id="nearby">
     <div class="container mb-3">
       <div class="card rounded">
         <div class="card-body">
-          <h2 class="text-center">Top Destinations</h1>
+          <h2>Top Destinations</h1>
           <div id="carouselExampleControls" class="carousel slide mb-3" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -1940,7 +1938,7 @@
     <div class="container">
     <div class="card rounded">
   <div class="card-body">
-    <h2 class="text-center">Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions</h2>
     <div class="accordion" id="faqAccordion">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
@@ -2032,7 +2030,7 @@
     <div class="container">
       <div class="card rounded">
         <div class="card-body">
-          <h2 class="text-center">Top Destinations</h1>
+          <h2>Top Destinations</h1>
           <div id="carouselExampleControls1" class="carousel slide mb-3" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -2123,7 +2121,7 @@
     <div class="container">
       <div class="card rounded">
         <div class="card-body">
-          <h2 class=" mb-4 text-center">Related articles</h2>
+          <h2 class="mb-4">Related articles</h2>
           <div class="row">
             <div class="col-md-6 mb-4">
                 <div class="row g-0">
@@ -2275,15 +2273,6 @@
       });
 
       var stickyDiv2 = document.getElementById("myStickyDiv2");
-      var stickyDivOffset2 = stickyDiv2.getBoundingClientRect().top;
-      window.addEventListener("scroll", function () {
-        if (stickyDivOffset2 <= window.scrollY) {
-          stickyDiv2.classList.add("sticky");
-        } else {
-          stickyDiv2.classList.remove("sticky");
-        }
-      });
-
       const sections = document.querySelectorAll(".sticky-section");
       const navLinks = document.querySelectorAll(".sticky-menu ul li a");
 
@@ -2297,7 +2286,11 @@
             current = section.getAttribute("id");
           }
         });
-
+        if(current == "overview" || current == "know" || current == "visit" || current == "reach" || current == "addinfo"){
+          stickyDiv2.classList.add("sticky");
+        }else {
+          stickyDiv2.classList.remove("sticky");
+        }
         navLinks.forEach((link) => {
           link.classList.remove("active");
           if (link.getAttribute("href") === `#${current}`) {
@@ -2305,6 +2298,8 @@
           }
         });
       });
+
+
 
     });
 

@@ -396,15 +396,19 @@ ol, ul {
   background-color: #e5eaf7;
   color: #000;
   font-weight: bold;
+   border-radius: 5px;
 }
 
 .accordion-button:not(.collapsed) {
   color: #000;
   background-color: #e5eaf7;
+  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
 }
 
 .accordion-body {
   background-color: #e5eaf7;
+  border-radius: 0 0 5px 5px;
 }
 
 .accordion-body .highlight {
@@ -441,7 +445,7 @@ ol, ul {
   
   .accordion-item {
     border: none;
-    border-bottom: 10px solid #ffffff;
+    margin-bottom: 8px;
   }
   
   .accordion-button:focus {
