@@ -40,7 +40,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const mobile_menu_button = document.querySelector('.mobile-menu-button');
     const mobile_search_button = document.querySelector('.mobile-search');
-    const mobile_menu_close = document.querySelector('.mobile-menu-close');
+    
+    const mobile_menu_close = document.querySelector('.mobile-menu-close>.close-btn');
+    const mobile_menu_back = document.querySelector('.mobile-menu-close>.back-btn');
+    mobile_menu_back.addEventListener('click', function(){
+    let v3 = false;
+        const mmLevel3Elements = document.querySelectorAll('.mm-level3');
+        mmLevel3Elements.forEach(element => {
+        if (!element.classList.contains('hidden')) {
+            element.classList.add('hidden');
+            v3 = true;
+        }
+        });
+
+        if(v3 != true){
+            const mmLevel2Elements = document.querySelectorAll('.mm-level2');
+            mmLevel2Elements.forEach(element => {
+            if (!element.classList.contains('hidden')) {
+                element.classList.add('hidden');
+            }
+            });
+        }
+    });
+
+
     const mobile_level2_close = document.querySelector('.mobile-level2-close');
     const mobile_level3_close = document.querySelector('.mobile-level3-close');
     const menu = document.querySelector('.mobile-menu');
@@ -59,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     mobile_menu_close.addEventListener('click', function() {
         menu.classList.toggle('hidden');
-        menulevel2.classList.toggle('hidden');
-        menulevel3.classList.toggle('hidden');
+        // menulevel2.classList.toggle('hidden');
+        // menulevel3.classList.toggle('hidden');
         document.body.classList.toggle('no-scroll');
     });
     mobile_level2_close.addEventListener('click', function() {
